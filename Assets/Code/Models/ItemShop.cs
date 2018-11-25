@@ -5,7 +5,7 @@ public class ItemShop
 {
     public static readonly int DoubleClickerPrice = 10;
 
-    public static readonly int AutoClickerPrice = 100;
+    public static readonly int AutoClickerPrice = 50;
 
     public bool CanPurchaseDoubleClicker =>
         this.gameController.Score >= DoubleClickerPrice;
