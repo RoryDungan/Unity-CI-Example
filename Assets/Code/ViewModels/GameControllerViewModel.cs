@@ -22,8 +22,20 @@ public class GameControllerViewModel : MonoBehaviour, INotifyPropertyChanged
     [Binding]
     public void Click() => this.gameController.Click();
 
+    private ItemShopViewModel itemShop;
+
     [Binding]
-    public ItemShopViewModel ItemShop { get; private set; }
+    public ItemShopViewModel ItemShop
+    {
+        get
+        {
+            if (this.itemShop == null)
+            {
+                this.itemShop = new ItemShopViewModel(this.gameController);
+            }
+            return this.itemShop;
+        }
+    }
 
     // Use this for initialization
     private void Awake()
@@ -31,7 +43,6 @@ public class GameControllerViewModel : MonoBehaviour, INotifyPropertyChanged
         Assert.IsNotNull(gameController);
 
         this.gameController.OnScoreChanged += this.GameController_OnScoreChanged;
-        this.ItemShop = new ItemShopViewModel(this.gameController);
     }
 
     private void OnDestroy()
