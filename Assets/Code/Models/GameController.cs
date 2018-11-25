@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityWeld.Binding;
 
 /// <summary>
 /// Keeps track of the global state of the game.
@@ -57,16 +58,12 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private IList<IItem> items;
-
-    private void Start()
-    {
-        this.items = new List<IItem>();
-    }
+    public ObservableList<IItem> Items { get; private set; }
+        = new ObservableList<IItem>();
 
     private void Update()
     {
-        foreach (var item in this.items)
+        foreach (var item in this.Items)
         {
             this.Score += item.Update(Time.time);
         }
@@ -81,7 +78,7 @@ public class GameController : MonoBehaviour
         this.Score++;
 
         // Add to score based on current items.
-        foreach (var item in this.items)
+        foreach (var item in this.Items)
         {
             this.Score += item.HandleClick();
         }
@@ -89,7 +86,7 @@ public class GameController : MonoBehaviour
 
     public void BuyItem(int price, IItem newItem)
     {
-        this.items.Add(newItem);
+        this.Items.Add(newItem);
         this.Score -= price;
     }
 }

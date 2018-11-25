@@ -37,6 +37,24 @@ public class GameControllerViewModel : MonoBehaviour, INotifyPropertyChanged
         }
     }
 
+    private BoundObservableList<ItemViewModel, IItem> items;
+
+    [Binding]
+    public BoundObservableList<ItemViewModel, IItem> Items
+    {
+        get
+        {
+            if (this.items == null)
+            {
+                this.items = new BoundObservableList<ItemViewModel, IItem>(
+                    this.gameController.Items,
+                    item => new ItemViewModel(item)
+                );
+            }
+            return this.items;
+        }
+    }
+
     // Use this for initialization
     private void Awake()
     {
@@ -48,6 +66,10 @@ public class GameControllerViewModel : MonoBehaviour, INotifyPropertyChanged
     private void OnDestroy()
     {
         this.gameController.OnScoreChanged -= this.GameController_OnScoreChanged;
+        if (this.items != null)
+        {
+            this.items.Dispose();
+        }
     }
 
     private void GameController_OnScoreChanged(object sender, GameController.ScoreChangedEventArgs eventArgs)

@@ -49,6 +49,10 @@ public class ItemShopViewModel : INotifyPropertyChanged, IDisposable
                 this,
                 new PropertyChangedEventArgs(nameof(CanPurchaseDoubleClicker))
             );
+            this.PropertyChanged(
+                this,
+                new PropertyChangedEventArgs(nameof(CanPurchaseAutoClicker))
+            );
         }
     }
 

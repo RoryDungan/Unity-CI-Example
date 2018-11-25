@@ -1,5 +1,7 @@
 public class DoubleClickerItem : IItem
 {
+    public string Name => "Double clicker";
+
     public int HandleClick()
     {
         // Give 1 extra point per click.

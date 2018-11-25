@@ -15,4 +15,6 @@ public interface IItem
     /// Allow the item to passively generate score.
     /// </summary>
     int Update(float currentTime);
+
+    string Name { get; }
 }

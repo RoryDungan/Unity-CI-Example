@@ -7,6 +7,8 @@ public class AutoClickerItem : IItem
 
     private static readonly float ClickInterval = 1f;
 
+    public string Name => "Auto-clicker";
+
     public int HandleClick()
     {
         return 0;
