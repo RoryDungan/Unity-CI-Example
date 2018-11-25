@@ -16,6 +16,9 @@ public class GameControllerViewModel : MonoBehaviour, INotifyPropertyChanged
     [Binding]
     public int Score => this.gameController.Score;
 
+    [Binding]
+    public void Click() => this.gameController.Click();
+
     // Use this for initialization
     private void Start()
     {
@@ -30,7 +33,7 @@ public class GameControllerViewModel : MonoBehaviour, INotifyPropertyChanged
 
     private void GameController_OnScoreChanged(object sender, GameController.ScoreChangedEventArgs eventArgs)
     {
-        OnPropertyChanged(nameof(Score));
+        this.OnPropertyChanged(nameof(Score));
     }
 
     private void OnPropertyChanged(string propertyName)

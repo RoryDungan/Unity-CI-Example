@@ -10,6 +10,10 @@ public class GameController : Singleton<GameController>
 {
     private int score;
 
+    /// <summary>
+    /// Current score value. In this case, the number of cookies that have
+    /// been collected.
+    /// </summary>
     public int Score
     {
         get
@@ -18,18 +22,14 @@ public class GameController : Singleton<GameController>
         }
         private set
         {
-            score = value;
+            this.score = value;
 
             // Notify score changed
-            if (OnScoreChanged != null)
+            if (this.OnScoreChanged != null)
             {
-                OnScoreChanged(this, new ScoreChangedEventArgs(score));
+                this.OnScoreChanged(this, new ScoreChangedEventArgs(value));
             }
         }
-    }
-
-    public GameController()
-    {
     }
 
     public event EventHandler<ScoreChangedEventArgs> OnScoreChanged;
@@ -42,5 +42,17 @@ public class GameController : Singleton<GameController>
         {
             this.score = newScore;
         }
+    }
+
+    public GameController()
+    {
+    }
+
+    /// <summary>
+    /// "Click" to collect a cookie.
+    /// </summary>
+    public void Click()
+    {
+        this.Score++;
     }
 }
