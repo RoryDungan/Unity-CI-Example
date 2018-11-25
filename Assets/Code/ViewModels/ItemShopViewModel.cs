@@ -23,8 +23,16 @@ public class ItemShopViewModel : INotifyPropertyChanged, IDisposable
         ItemShop.DoubleClickerPrice;
 
     [Binding]
+    public int AutoClickerPrice =>
+        ItemShop.AutoClickerPrice;
+
+    [Binding]
     public bool CanPurchaseDoubleClicker =>
         this.itemShop.CanPurchaseDoubleClicker;
+
+    [Binding]
+    public bool CanPurchaseAutoClicker =>
+        this.itemShop.CanPurchaseAutoClicker;
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -47,4 +55,8 @@ public class ItemShopViewModel : INotifyPropertyChanged, IDisposable
     [Binding]
     public void PurchaseDoubleClicker() =>
         this.itemShop.PurchaseDoubleClicker();
+
+    [Binding]
+    public void PurchaseAutoClicker() =>
+        this.itemShop.PurchaseAutoClicker();
 }
