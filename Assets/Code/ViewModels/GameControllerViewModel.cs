@@ -7,28 +7,26 @@ using UnityWeld.Binding;
 /// <summary>
 /// View-model for the game controller.
 /// </summary>
+[Binding]
 public class GameControllerViewModel : MonoBehaviour, INotifyPropertyChanged
 {
-    private GameController gameController;
-
     public event PropertyChangedEventHandler PropertyChanged;
 
     [Binding]
-    public int Score => this.gameController.Score;
+    public int Score => GameController.Instance.Score;
 
     [Binding]
-    public void Click() => this.gameController.Click();
+    public void Click() => GameController.Instance.Click();
 
     // Use this for initialization
     private void Start()
     {
-        this.gameController = GameController.Instance;
-        this.gameController.OnScoreChanged += this.GameController_OnScoreChanged;
+        GameController.Instance.OnScoreChanged += this.GameController_OnScoreChanged;
     }
 
     private void OnDestroy()
     {
-        this.gameController.OnScoreChanged -= this.GameController_OnScoreChanged;
+        GameController.Instance.OnScoreChanged -= this.GameController_OnScoreChanged;
     }
 
     private void GameController_OnScoreChanged(object sender, GameController.ScoreChangedEventArgs eventArgs)
