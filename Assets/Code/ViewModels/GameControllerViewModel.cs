@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityWeld.Binding;
 
 /// <summary>
@@ -10,23 +11,31 @@ using UnityWeld.Binding;
 [Binding]
 public class GameControllerViewModel : MonoBehaviour, INotifyPropertyChanged
 {
+    [SerializeField]
+    private GameController gameController;
+
     public event PropertyChangedEventHandler PropertyChanged;
 
     [Binding]
-    public int Score => GameController.Instance.Score;
+    public int Score => this.gameController.Score;
 
     [Binding]
-    public void Click() => GameController.Instance.Click();
+    public void Click() => this.gameController.Click();
+
+    private void Awake()
+    {
+        Assert.IsNotNull(gameController);
+    }
 
     // Use this for initialization
     private void Start()
     {
-        GameController.Instance.OnScoreChanged += this.GameController_OnScoreChanged;
+        this.gameController.OnScoreChanged += this.GameController_OnScoreChanged;
     }
 
     private void OnDestroy()
     {
-        GameController.Instance.OnScoreChanged -= this.GameController_OnScoreChanged;
+        this.gameController.OnScoreChanged -= this.GameController_OnScoreChanged;
     }
 
     private void GameController_OnScoreChanged(object sender, GameController.ScoreChangedEventArgs eventArgs)

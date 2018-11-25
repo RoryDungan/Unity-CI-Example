@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// Keeps track of the global state of the game.
 /// </summary>
-public class GameController : Singleton<GameController>
+public class GameController : MonoBehaviour
 {
     private int score;
 
@@ -44,8 +44,19 @@ public class GameController : Singleton<GameController>
         }
     }
 
-    public GameController()
+    private IList<IItem> items;
+
+    private void Start()
     {
+        this.items = new List<IItem>();
+    }
+
+    private void Update()
+    {
+        foreach (var item in this.items)
+        {
+            this.Score += item.Update(Time.time);
+        }
     }
 
     /// <summary>
@@ -53,6 +64,19 @@ public class GameController : Singleton<GameController>
     /// </summary>
     public void Click()
     {
+        // Add one to score.
         this.Score++;
+
+        // Add to score based on current items.
+        foreach (var item in this.items)
+        {
+            this.Score += item.HandleClick();
+        }
+    }
+
+    public void BuyItem(int price, IItem newItem)
+    {
+        this.items.Add(newItem);
+        this.Score -= price;
     }
 }
