@@ -44,11 +44,14 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public ItemShop ItemShop { get; private set; }
+
     private IList<IItem> items;
 
     private void Start()
     {
         this.items = new List<IItem>();
+        this.ItemShop = new ItemShop(this);
     }
 
     private void Update()
