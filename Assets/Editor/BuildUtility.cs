@@ -17,8 +17,7 @@ namespace Build
         // Config file with a list of scenes to build.
         private static string BuildConfigFileName = "build-config.json";
 
-        [MenuItem("Tools/Make build (Mac)")]
-        public static void MakeBuildMacMenu()
+        private static void ShowSaveFilePanelAndBuild(BuildTarget target)
         {
             var path = EditorUtility.SaveFilePanel(
                 "Save build",
@@ -28,8 +27,38 @@ namespace Build
             );
             if (!string.IsNullOrEmpty(path))
             {
-                MakeBuild(path, BuildTarget.StandaloneOSX);
+                MakeBuild(path, target);
             }
+        }
+
+        [MenuItem("Tools/Make build (Linux)")]
+        public static void MakeBuildLinuxMenu()
+        {
+            ShowSaveFilePanelAndBuild(BuildTarget.StandaloneLinux64);
+        }
+
+        [MenuItem("Tools/Make build (Windows)")]
+        public static void MakeBuildWindowsMenu()
+        {
+            ShowSaveFilePanelAndBuild(BuildTarget.StandaloneWindows64);
+        }
+
+        [MenuItem("Tools/Make build (Mac)")]
+        public static void MakeBuildMacMenu()
+        {
+            ShowSaveFilePanelAndBuild(BuildTarget.StandaloneOSX);
+        }
+
+        public static void MakeBuildLinuxCLI()
+        {
+            var outputPath = GetCommandLineArg("buildPath");
+            MakeBuild(outputPath, BuildTarget.StandaloneLinux64);
+        }
+
+        public static void MakeBuildWindowsCLI()
+        {
+            var outputPath = GetCommandLineArg("buildPath");
+            MakeBuild(outputPath, BuildTarget.StandaloneWindows64);
         }
 
         public static void MakeBuildMacCLI()
