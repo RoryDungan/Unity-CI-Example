@@ -14,6 +14,7 @@ check_env() {
 }
 
 check_env BUILDS_DIR "This should be set to the directory to save builds in."
+check_env BUILD_METHOD "This should be set to the C# method to invoke to create the build."
 check_env BUILD_TARGET "This should be set to the platform to build for (iOS or Android)."
 
 # Set project source to the full path to the directory containing this script
@@ -29,7 +30,7 @@ UNITY=/Applications/Unity/Hub/Editor/2018.3.9f1/Unity.app/Contents/MacOS/Unity
 echo Building to $OUTDIR
 echo Build started: `date`
 
-$UNITY -nographics -quit -batchmode -buildTarget $BUILD_TARGET -projectPath "$SRC" -logFile "$LOGFILE" -executeMethod Build.BuildUtility.MakeBuildMacCLI -buildPath "$OUTDIR" &
+$UNITY -nographics -quit -batchmode -buildTarget $BUILD_TARGET -projectPath "$SRC" -logFile "$LOGFILE" -executeMethod $BUILD_METHOD -buildPath "$OUTDIR" &
 unitypid=$!
 
 # Pipe Unity log output to stdout
