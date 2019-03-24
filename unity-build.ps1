@@ -1,18 +1,18 @@
-﻿function Check-Env($variableName, $message) {
+﻿function Check-Env ($variableName, $message) {
     if (![System.Environment]::GetEnvironmentVariable($variableName)) {
-        echo $variableName environment variable not set!
-        echo $message
+        Write-Host "$variableName environment variable not set!"
+        Write-Host $message
         Exit 1
     }
 }
 
-Check-Env('BUILD_TAG', 'This should be set by Jenkins and is required to determine the build output path.')
-Check-Env('BUILDS_DIR', 'This should be set to the directory to save builds in.')
-Check-Env('BUILD_TARGET', 'This should be set to the platform to build for.')
+Check-Env 'BUILDS_DIR' 'This should be set to the directory to save builds in.'
+Check-Env 'BUILD_METHOD' 'This should be set to the C# method to invoke to create the build.'
+Check-Env 'BUILD_TARGET' 'This should be set to the platform to build for.'
 
 # Set project source to the full path to the directory containing this script
 $src = $PSScriptRoot
-$outdir = Join-Path -Path $Env:BUILDS_DIR -ChildPath $Env:BUILD_TAG
+$outdir = $Env:BUILDS_DIR
 
 # Create temporary file for the Unity log. 
 # We need this because if multiple editor instances are open we can't rely on the contents of the default Editor.log
