@@ -30,7 +30,7 @@ UNITY=/Applications/Unity/Hub/Editor/2018.3.9f1/Unity.app/Contents/MacOS/Unity
 echo Building to $OUTDIR
 echo Build started: `date`
 
-$UNITY -nographics -quit -batchmode -buildTarget $BUILD_TARGET -projectPath "$SRC" -logFile "$LOGFILE" -executeMethod Build.BuildUtility.MakeBuild -buildPath "$OUTDIR" &
+$UNITY -nographics -quit -batchmode -buildTarget $BUILD_TARGET -projectPath "$SRC" -logFile "$LOGFILE" -executeMethod Build.BuildUtility.MakeBuildMacCLI -buildPath "$OUTDIR" &
 unitypid=$!
 
 # Pipe Unity log output to stdout
