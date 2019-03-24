@@ -25,7 +25,7 @@ OUTDIR=${BUILDS_DIR}/${BUILD_TAG}
 # the contents of the default Editor.log containing output just from this instance.
 LOGFILE=$(mktemp)
 # Path to Unity - change to match your install location
-UNITY=/Applications/Unity/Unity.app/Contents/MacOS/Unity 
+UNITY=/Applications/Unity/Hub/Editor/2018.3.9f1/Unity.app/Contents/MacOS/Unity 
 
 echo Building to $OUTDIR
 echo Build started: `date`
