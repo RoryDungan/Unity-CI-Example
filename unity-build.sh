@@ -13,13 +13,12 @@ check_env() {
     fi
 }
 
-check_env BUILD_TAG "This should be set by Jenkins and is required to determine the build output path."
 check_env BUILDS_DIR "This should be set to the directory to save builds in."
 check_env BUILD_TARGET "This should be set to the platform to build for (iOS or Android)."
 
 # Set project source to the full path to the directory containing this script
 SRC=$( cd "$(dirname $0)" ; pwd -P )
-OUTDIR=${BUILDS_DIR}/${BUILD_TAG}
+OUTDIR=${BUILDS_DIR}
 # Create a temporary file for the log file.
 # We need this because if multiple editor instances are open we can't rely on 
 # the contents of the default Editor.log containing output just from this instance.
