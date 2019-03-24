@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using UnityEditor;
+using UnityEditor.Build.Reporting;
 using UnityEngine;
 
 namespace Build
@@ -17,6 +18,8 @@ namespace Build
         // Config file with a list of scenes to build.
         private static string BuildConfigFileName = "build-config.json";
 
+        private static string DefaultOutputName = "Cookie Clicker";
+
         private static void ShowSaveFilePanelAndBuild(BuildTarget target)
         {
             var path = EditorUtility.SaveFilePanel(
@@ -25,7 +28,7 @@ namespace Build
                 "Build",
                 string.Empty // Unity automatically adds .app extension
             );
-            if (!string.IsNullOrEmpty(path))
+            if (string.IsNullOrEmpty(path))
             {
                 MakeBuild(path, target);
             }
@@ -64,14 +67,17 @@ namespace Build
         public static void MakeBuildMacCLI()
         {
             var outputPath = GetCommandLineArg("buildPath");
-            MakeBuild(outputPath, BuildTarget.StandaloneOSX);
+            MakeBuild(
+                Path.Combine(outputPath, DefaultOutputName),
+                BuildTarget.StandaloneOSX
+            );
         }
 
-        private static void MakeBuild(string outputPath, BuildTarget target)
+        private static BuildReport MakeBuild(string outputPath, BuildTarget target)
         {
             var buildConfig = LoadBuildConfig();
 
-            BuildPipeline.BuildPlayer(
+            return BuildPipeline.BuildPlayer(
                 buildConfig.Scenes,
                 outputPath,
                 target,
