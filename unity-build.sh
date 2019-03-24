@@ -20,7 +20,6 @@ check_env BUILD_TARGET "This should be set to the platform to build for (iOS or 
 # Set project source to the full path to the directory containing this script
 SRC=$( cd "$(dirname $0)" ; pwd -P )
 OUTDIR=${BUILDS_DIR}
-mkdir -p $OUTDIR
 
 # Create a temporary file for the log file.
 # We need this because if multiple editor instances are open we can't rely on 
