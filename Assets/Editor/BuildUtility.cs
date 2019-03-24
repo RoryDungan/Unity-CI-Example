@@ -55,13 +55,19 @@ namespace Build
         public static void MakeBuildLinuxCLI()
         {
             var outputPath = GetCommandLineArg("buildPath");
-            MakeBuild(outputPath, BuildTarget.StandaloneLinux64);
+            MakeBuild(
+                Path.Combine(outputPath, DefaultOutputName + ".exe"),
+                BuildTarget.StandaloneLinux64
+            );
         }
 
         public static void MakeBuildWindowsCLI()
         {
             var outputPath = GetCommandLineArg("buildPath");
-            MakeBuild(outputPath, BuildTarget.StandaloneWindows64);
+            MakeBuild(
+                Path.Combine(outputPath, DefaultOutputName),
+                BuildTarget.StandaloneWindows64
+            );
         }
 
         public static void MakeBuildMacCLI()
