@@ -26,8 +26,8 @@ Write-Host "Build started:" (Get-Date).ToString()
 
 $process = $null
 try {
-    $arguments = "-nographics -quit -batchmode -buildTarget $Env:BUILD_TARGET -projectPath $src -logFile '$logFile' -executeMethod Build.BuildUtility.MakeBuild -buildPath '$outdir'"
-    $process = Start-Process $unity -PassThru
+    $unityArgs = "-nographics -quit -batchmode -buildTarget $Env:BUILD_TARGET -projectPath `"$src`" -logFile `"$logFile`" -executeMethod $Env:BUILD_METHOD -buildPath `"$outdir`""
+    $process = Start-Process -FilePath "$unity" -ArgumentList $unityArgs -PassThru
     Wait-Process -Id $process.Id
 
     # Write log output to standard output. TODO: Can we tail the file and output in real time as it's being written to?
@@ -35,7 +35,7 @@ try {
 }
 finally {
     # Kill Unity if this script was killed. This makes sure the build actually stops if we cancel the job in Jenkins.
-    if ($process -ne $null) {
+    if ($process -ne $null -And -Not $process.HasExited) {
         Stop-Process $process.Id
     }
 
