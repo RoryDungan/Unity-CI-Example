@@ -56,7 +56,7 @@ namespace Build
         {
             var outputPath = GetCommandLineArg("buildPath");
             MakeBuild(
-                Path.Combine(outputPath, DefaultOutputName + ".exe"),
+                Path.Combine(outputPath, DefaultOutputName),
                 BuildTarget.StandaloneLinux64
             );
         }
@@ -65,7 +65,7 @@ namespace Build
         {
             var outputPath = GetCommandLineArg("buildPath");
             MakeBuild(
-                Path.Combine(outputPath, DefaultOutputName),
+                Path.Combine(outputPath, DefaultOutputName + ".exe"),
                 BuildTarget.StandaloneWindows64
             );
         }
