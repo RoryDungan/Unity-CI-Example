@@ -19,7 +19,7 @@ public class AutoClickerItem : IItem
         if (currentTime > this.lastClickTime + ClickInterval)
         {
             this.lastClickTime = currentTime;
-            return 1;
+            return 32;
         }
         return 0;
     }
