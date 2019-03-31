@@ -32,13 +32,14 @@ To make a build for Mac using the tools in `BuildUtility` directly, navigate to 
     /Applications/Unity/Hub/Editor/2018.3.9f1/Unity.app/Contents/MacOS/Unity -nographics -batchmode -quit -projectPath . -executeMethod Build.BuildUtility.MakeBuildMacCLI -buildPath /path/to/build/output
 
 Where
-    - `/Applications/Unity/Hub/Editor/2018.3.9f1/Unity.app/Contents/MacOS/Unity` is the path to the Unity Editor executable. This will depend on where you chose to install Unity and your platform. On Windows it will probably be something like `C:\Program Files\Unity\Hub\Editor\2018.3.9f1\Editor\Unity.exe`
-    - `-nographics` tells Unity not to create a graphical window. Useful for us because we don't need to interact with the window and we may want to run this on a build server with no graphics card. On a system with no graphics card, *not* specifying `-nographics` will crash Unity because it will be unable to initialise the 3d view.
-    - `-batchmode` tells Unity we are running batch commands from the CLI (as opposed to the default interactive mode)
-    - `-quit` ensures Unity quits once we're done making the build.
-    - `-projectPath .` tells Unity to open the project in the current working directory. Alternatively, you can specify the full path to the directory containing your project, which can be useful if you don't want your working directory to be the same as the project.
-    - `-executeMethod Build.BuildUtility.MakeBuildMacCLI` specifies the static editor method to run. In this case it's our custom editor method that creates a build. Substitute this for `MakeBuildLinuxCLI` or `MakeBuildWindowsCLI` to build for those platforms.
-    - `-buildPath /path/to/build/output` is the custom additional argument that `BuildUtility` parses to work out where to save your build. Substitute with the path to where you actually want to save your build.
+
+- `/Applications/Unity/Hub/Editor/2018.3.9f1/Unity.app/Contents/MacOS/Unity` is the path to the Unity Editor executable. This will depend on where you chose to install Unity and your platform. On Windows it will probably be something like `C:\Program Files\Unity\Hub\Editor\2018.3.9f1\Editor\Unity.exe`
+- `-nographics` tells Unity not to create a graphical window. Useful for us because we don't need to interact with the window and we may want to run this on a build server with no graphics card. On a system with no graphics card, *not* specifying `-nographics` will crash Unity because it will be unable to initialise the 3d view.
+- `-batchmode` tells Unity we are running batch commands from the CLI (as opposed to the default interactive mode)
+- `-quit` ensures Unity quits once we're done making the build.
+- `-projectPath .` tells Unity to open the project in the current working directory. Alternatively, you can specify the full path to the directory containing your project, which can be useful if you don't want your working directory to be the same as the project.
+- `-executeMethod Build.BuildUtility.MakeBuildMacCLI` specifies the static editor method to run. In this case it's our custom editor method that creates a build. Substitute this for `MakeBuildLinuxCLI` or `MakeBuildWindowsCLI` to build for those platforms.
+- `-buildPath /path/to/build/output` is the custom additional argument that `BuildUtility` parses to work out where to save your build. Substitute with the path to where you actually want to save your build.
 
 ## Using the helper scripts (unity-build.sh and unity-build.ps1)
 
